@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<p id="demo"></p>
+	<span id="demo1"></span>
+<textarea id="editor"></textarea><br>
+<p>
+ Select a file from your computer to being read as text.
+</p>
+<input type="file" id="filetoRead" />
+
+<script>
+	var string = "";
+document.getElementById("filetoRead").addEventListener("change",function(){
+        var file = this.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+            
+            reader.onload = function (evt) {
+                console.log(evt);
+                document.getElementById("editor").value = evt.target.result;                
+                         };
+
+            reader.onerror = function (evt) {
+                console.error("An error ocurred reading the file",evt);
+            };
+
+            reader.readAsText(file, "UTF-8");
+        }
+    },false);
+
+</script>
+</body>
+</html>
